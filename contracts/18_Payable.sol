@@ -18,7 +18,7 @@ contract Teleton {
         owner = nuevoOwner;
     }
 
-    function despositar() public payable {
+    function depositar() public payable {
 
     }
 

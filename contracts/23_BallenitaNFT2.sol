@@ -71,17 +71,17 @@ contract BallenitaNFT is ERC721, Ownable {
         _transfer(address(this), msg.sender, tokenId);
     }
 
-    /*
+    
     function comprarPosterConBFT(uint256 tokenId) public {
 
-        require(_ownerOf(tokenId) == address(this), "El poster no esta disponible");
+        require(ownerOf(tokenId) == address(this), "El poster no esta disponible");
         Poster memory poster = posters[tokenId];
         require(tokenBFT.balanceOf(msg.sender) >= poster.precio, "No tienes BFT suficiente");
-        tokenBFT.transferFrom(msg.sender, owner(), poster.precio);
-
+        require(tokenBFT.allowance(msg.sender, address(this)) >= poster.precio, "Debes aprobar primero los BFT");
+        bool exito = tokenBFT.transferFrom(msg.sender, owner(), poster.precio);
+        require(exito, "Error al transferir los BFT");
         _transfer(address(this), msg.sender, tokenId);
-        
-    }*/   
+    }
 
 
     function retirar() public onlyOwner {
